@@ -1,0 +1,30 @@
+<?php
+
+
+
+
+/**
+ *Implements hook_node_view().
+ * @param $node The node object being rendered.
+ * @param $view_mode How the node is being viewed.
+ * This hook gets called every time a node is being rendered.
+ */
+
+function redbutton_node_view($node, $view_mode){
+
+    if($node->type == 'article'){
+
+        $link_text = t('Delete this node');
+
+        $link_options = array(
+          'attributes' => array('style' => 'color:#ff0000'),
+        );
+
+        $link_markup = l($link_text, "node/$node->nid/delete", $link_options);
+        $node->content['redbutton'] =  array();
+        $node->content['redbutton']['#markup'] = $link_markup;
+
+    }
+
+}
+
